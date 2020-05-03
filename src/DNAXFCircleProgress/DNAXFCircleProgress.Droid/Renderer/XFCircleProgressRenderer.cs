@@ -9,15 +9,19 @@ namespace DNAXFCircleProgress.Droid.Renderer
     using Android.Text;
     using Android.Animation;
     using Android.Views.Animations;
+    using Android.Content;
 
     public class XFCircleProgressRenderer : ViewRenderer<XFCircleProgress, ProgressBar>
     {
         private ProgressBar pBar;
         private Drawable pBarBackDrawable;
         private Drawable pBarForeDrawable;
-        public XFCircleProgressRenderer()
+        private readonly Context context;
+
+        public XFCircleProgressRenderer(Context context) : base(context)
         {
             SetWillNotDraw(false);
+            this.context = context;
         }
 
         public static void InitRender()
@@ -38,8 +42,8 @@ namespace DNAXFCircleProgress.Droid.Renderer
 
         protected override ProgressBar CreateNativeControl()
         {
-            pBarBackDrawable = DrawableCompat.Wrap(Resources.GetDrawable("CircularProgress_background"));
-            pBarForeDrawable = DrawableCompat.Wrap(Resources.GetDrawable("CircularProgress_drawable"));
+            pBarBackDrawable = DrawableCompat.Wrap(context.GetDrawable("CircularProgress_background"));
+            pBarForeDrawable = DrawableCompat.Wrap(context.GetDrawable("CircularProgress_drawable"));
 
             DrawableCompat.SetTint(pBarBackDrawable, Element.BackColor.ToAndroid());
             DrawableCompat.SetTint(pBarForeDrawable, Element.ForeColor.ToAndroid());

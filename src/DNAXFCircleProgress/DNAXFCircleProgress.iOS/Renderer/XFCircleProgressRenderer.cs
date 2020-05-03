@@ -31,6 +31,9 @@ namespace DNAXFCircleProgress.iOS.Renderer
         {
             base.OnElementChanged(e);
 
+            if (e.NewElement == null)
+                return;
+
             indicatorFontSize = Element.TextSize;
 
             backgroundCircle = new CAShapeLayer();
@@ -50,7 +53,7 @@ namespace DNAXFCircleProgress.iOS.Renderer
 
             double heightRatio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
             double widthRatio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
-            double ratio = 1;
+            double ratio;
             if (heightRatio < widthRatio)
                 ratio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
             else
